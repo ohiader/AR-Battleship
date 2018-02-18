@@ -92,11 +92,17 @@ public class gameManager : MonoBehaviour {
 		{
 			for (int j = 0; j < 10; j++)
 			{
-				playerBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
+				if (ToggleSettings.scaleToggle) {
+					playerBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i * 3.0f, 0, (float)j * 3.0f), Quaternion.identity);
+					playerBoard [i, j].transform.localScale = new Vector3 (0.3f, 1.0f, 0.3f);
+					playerBoard[i, j].transform.position += new Vector3 (-14.0f, -0.8f, -3.0f);
+				} else {
+					playerBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
+					playerBoard[i, j].transform.position += new Vector3 (-4.0f, -0.8f, 6.0f);
+				}
 				playerBoard[i,j].transform.parent = transform;
 				playerBoard[i,j].transform.name = "gridPoint" + indexOfBoard;
 				playerBoard [i, j].tag = "Inactive";
-				playerBoard[i,j].transform.position += new Vector3 ((float)-4.0, (float)-0.8, (float)6.0);
 				playerBoard[i,j].SetActive (true);
 				indexOfBoard++;
 			}

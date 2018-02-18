@@ -28,6 +28,9 @@ public class Loader : MonoBehaviour {
 		GameManager.transform.GetChild (0).GetChild (1).gameObject.SetActive (false);
 		GameManager.transform.GetChild (0).GetChild (0).gameObject.SetActive (true);
 			
+		if (ToggleSettings.scaleToggle) {
+			GameManager.transform.GetChild (0).GetChild (2).gameObject.transform.localScale = new Vector3 (0.007727273f * 3.0f, 0.06181818f, 0.007727273f * 3.0f);
+		}
 		/*} else {
 			if (enemyManager.instance == null) {
 				Debug.Log("Made Enemy Manager");

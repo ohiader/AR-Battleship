@@ -53,10 +53,18 @@ public class enemyManager : MonoBehaviour {
 			{
 				for (int j = 0; j < 10; j++)
 				{
-					enemyBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
+					
+					
+					if (ToggleSettings.scaleToggle) {
+						enemyBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i * 3.0f, 0, (float)j * 3.0f), Quaternion.identity);
+						enemyBoard [i, j].transform.localScale = new Vector3 (0.3f, 1.0f, 0.3f);
+						enemyBoard[i, j].transform.position += new Vector3 (-12.0f, -0.8f, -6.0f);
+					} else {
+						enemyBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
+						enemyBoard[i, j].transform.position += new Vector3 (-4.0f, -0.8f, 6.0f);
+					}
 					enemyBoard[i, j].transform.parent = transform;
 					enemyBoard [i, j].name = "gridPoint" + index;
-				enemyBoard[i, j].transform.position += new Vector3 ((float)-4.0, (float)-0.8, (float)6.0);
 					enemyBoard [i, j].GetComponent<ParticleSystem> ().Pause ();
 					index++;
 

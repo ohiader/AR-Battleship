@@ -93,9 +93,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 0
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &114966232610311548
@@ -111,8 +111,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inactive: {fileID: 2100000, guid: a71d987bed7bd43f3984836652642c09, type: 2}
   active: {fileID: 2100000, guid: 6f8ac93a0eb7043739d1437a359a15da, type: 2}
-  battleShip1: {fileID: 196860, guid: 7bc650a8a5d0e4b8598bc43eeadd9428, type: 2}
-  battleShip2: {fileID: 179412, guid: 18893a99988e844eab626cbe89465e38, type: 2}
-  battleShip3: {fileID: 186110, guid: 776ac05bba07447ebb0501c309eacdb2, type: 2}
-  battleShip4: {fileID: 171664, guid: 6ea43b8b38d2343e4b3eb8d452fcb850, type: 2}
-  battleShip5: {fileID: 180674, guid: 876b971faff4f402cbbe36d811c826d2, type: 2}

@@ -4,4 +4,22 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/enemyBoard.unity
+    guid: 13c76c1b4e08d4657a847388633d9577
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 63bddc690da6a4b818f9b322e3482d54
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 3a8a94b3d4b5d48d197c7b3ff46c1bd8
+  - enabled: 1
+    path: Assets/Scenes/placeShips.unity
+    guid: a8e3af414f6a9438c9358c7b53c714e2
+  - enabled: 1
+    path: Assets/Scenes/playerBoard.unity
+    guid: 6bf7810b665c84393864a2cf7f85b0a2
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: f727968941c494bdfbaece39db909445
