@@ -46,7 +46,7 @@ public class MaybeThisWillWork : MonoBehaviour {
 									gameManager.b1.SetActive (true);
 									gameManager.b1.transform.position = gameManager.shipTransform1.position;
 									if (gameManager.ship1Dir == 1) { //vertical
-										gameManager.b1.transform.Rotate(0,90,0); //.RotateAround (gameManager.b1.transform.position, Vector3.forward, 90);
+										gameManager.b1.transform.localEulerAngles = new Vector3(0,90,0); //.RotateAround (gameManager.b1.transform.position, Vector3.forward, 90);
 									}
 								}
 							}
@@ -66,7 +66,7 @@ public class MaybeThisWillWork : MonoBehaviour {
 									gameManager.b2.SetActive(true);
 									gameManager.b2.transform.position = gameManager.shipTransform2.position;
 									if (gameManager.ship2Dir == 1) { //vertical
-										gameManager.b2.transform.Rotate(0,90,0);									}
+										gameManager.b2.transform.localEulerAngles = new Vector3(0,90,0);									}
 								}
 							}
 							else if (gameManager.shipIndex == 3 && gameManager.Ship3 <= 3 ) {
@@ -85,7 +85,7 @@ public class MaybeThisWillWork : MonoBehaviour {
 									gameManager.b3.SetActive(true);
 									gameManager.b3.transform.position = gameManager.shipTransform3.position;
 									if (gameManager.ship3Dir == 1) { //vertical
-										gameManager.b3.transform.Rotate(0,90,0);									} 
+										gameManager.b3.transform.localEulerAngles = new Vector3(0,90,0);									} 
 								}
 							}
 							else if (gameManager.shipIndex == 4 && gameManager.Ship4 <= 4 ) {
@@ -104,7 +104,7 @@ public class MaybeThisWillWork : MonoBehaviour {
 									gameManager.b4.SetActive(true);
 									gameManager.b4.transform.position = gameManager.shipTransform4.position;
 									if (gameManager.ship4Dir == 2 && check4) { //horizontal
-											gameManager.b4.transform.Rotate (0, -90, 0);
+										gameManager.b4.transform.localEulerAngles = new Vector3(0, -90, 0);
 											check4 = false;
 									}
 								}
@@ -125,7 +125,7 @@ public class MaybeThisWillWork : MonoBehaviour {
 									gameManager.b5.SetActive(true);
 									gameManager.b5.transform.position = gameManager.shipTransform5.position;
 									if (gameManager.ship5Dir == 1 && check5) { //vertical
-										gameManager.b5.transform.Rotate(0,90,0);
+										gameManager.b5.transform.localEulerAngles = new Vector3(0,90,0);
 										check5 = false;
 									}
 								}
