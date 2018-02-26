@@ -95,10 +95,10 @@ public class gameManager : MonoBehaviour {
 				if (ToggleSettings.scaleToggle) {
 					playerBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i * 3.0f, 0, (float)j * 3.0f), Quaternion.identity);
 					playerBoard [i, j].transform.localScale = new Vector3 (0.3f, 1.0f, 0.3f);
-					playerBoard[i, j].transform.position += new Vector3 (-14.0f, -0.8f, -3.0f);
+					playerBoard[i, j].transform.position += new Vector3 (-14.0f, 1.0f, -3.0f);
 				} else {
 					playerBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
-					playerBoard[i, j].transform.position += new Vector3 (-4.0f, -0.8f, 6.0f);
+					playerBoard[i, j].transform.position += new Vector3 (-4.0f, 1.0f, 6.0f);
 				}
 				playerBoard[i,j].transform.parent = transform;
 				playerBoard[i,j].transform.name = "gridPoint" + indexOfBoard;
@@ -107,11 +107,19 @@ public class gameManager : MonoBehaviour {
 				indexOfBoard++;
 			}
 		}
-		b1 = battleship1;
-		b2 = battleship2;
-		b3 = battleship3;
-		b4 = battleship4;
-		b5 = battleship5;
+		b1 = battleship1; // Submarine
+		b2 = battleship2; // Scout
+		b3 = battleship3; // Transport
+		b4 = battleship4; // Battleship
+		b5 = battleship5; // Aircraft Carrier
+		if (ToggleSettings.scaleToggle) {
+			b1.transform.localScale = new Vector3 (8.0f, 8.0f, 8.0f);
+			b2.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
+			b3.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
+			b4.transform.localScale = new Vector3 (6.0f, 6.0f, 6.0f);
+			b5.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
+		}
+
 
 	}
 

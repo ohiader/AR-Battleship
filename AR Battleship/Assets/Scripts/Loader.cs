@@ -29,7 +29,7 @@ public class Loader : MonoBehaviour {
 		GameManager.transform.GetChild (0).GetChild (0).gameObject.SetActive (true);
 			
 		if (ToggleSettings.scaleToggle) {
-			GameManager.transform.GetChild (0).GetChild (2).gameObject.transform.localScale = new Vector3 (0.007727273f * 3.0f, 0.06181818f, 0.007727273f * 3.0f);
+			GameManager.transform.GetChild (0).GetChild (2).gameObject.transform.localScale = new Vector3 (1.545455f * 3.0f, 0.3863636f, 1.545455f * 3.0f);
 		}
 		/*} else {
 			if (enemyManager.instance == null) {
@@ -37,6 +37,9 @@ public class Loader : MonoBehaviour {
 				Instantiate (EnemyManager, new Vector3 ((float) 0.0, (float) 0.5, (float) 0.0), Quaternion.identity);
 			}
 		}*/
+		if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Menu")) {
+			
+		}
 	}
 
 	// Update is called once per frame
@@ -54,6 +57,6 @@ public class Loader : MonoBehaviour {
 	{
 		Destroy(Music);
 		//Destroy(Loader.GameManager);
-		Application.LoadLevel("Menu");
+		SceneManager.LoadScene("Menu");
 	}
 }

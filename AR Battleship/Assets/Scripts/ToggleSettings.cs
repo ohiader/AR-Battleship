@@ -7,7 +7,7 @@ public class ToggleSettings : MonoBehaviour {
 
 	public Toggle scale, ui, transition, selection;
 	public GameObject panel;
-	public static bool scaleToggle;
+	public static bool scaleToggle, selectionToggle;
 
 	// Use this for initialization
 	void Start () {
@@ -46,6 +46,11 @@ public class ToggleSettings : MonoBehaviour {
 
 	public void toggleSelection() {
 		//switch between direct and indirect selection
+		if (selection.isOn) {
+			selectionToggle = true;
+		} else {
+			selectionToggle = false;
+		}
 	}
 
 }

@@ -16,6 +16,10 @@ public class PlayerShoot : MonoBehaviour {
 
 	void OnMouseDown() {
 		//limit one until check?
+		if (ToggleSettings.selectionToggle) {
+			return;
+		}
+
 		if ( Input.GetMouseButtonDown(0))
 		{
 				print(gameObject.name);
