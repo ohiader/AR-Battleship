@@ -41,38 +41,78 @@ public class ButtonDisabler : MonoBehaviour {
 		// When pressed, buttons switch and stay to pressed state
 		if ((gameManager.shipIndex == 1) && (gameManager.count1 != 1)) {
 			ship1Btn.image.color = pressed;
-			ship2Btn.image.color = Color.white;
-			ship3Btn.image.color = Color.white;
-			ship4Btn.image.color = Color.white;
-			ship5Btn.image.color = Color.white;
+			if (gameManager.count2 != 1) {
+				ship2Btn.image.color = Color.white;
+			}
+			if (gameManager.count3 != 1) {
+				ship3Btn.image.color = Color.white;
+			}
+			if (gameManager.count4 != 1) {
+				ship4Btn.image.color = Color.white;
+			}
+			if (gameManager.count5 != 1) {
+				ship5Btn.image.color = Color.white;
+			}
 		}
 		if ((gameManager.shipIndex == 2) && (gameManager.count2 != 1)) {
 			ship2Btn.image.color = pressed;
-			ship1Btn.image.color = Color.white;
-			ship3Btn.image.color = Color.white;
-			ship4Btn.image.color = Color.white;
-			ship5Btn.image.color = Color.white;
+			if (gameManager.count1 != 1) {
+				ship1Btn.image.color = Color.white;
+			}
+			if (gameManager.count3 != 1) {
+				ship3Btn.image.color = Color.white;
+			}
+			if (gameManager.count4 != 1) {
+				ship4Btn.image.color = Color.white;
+			}
+			if (gameManager.count5 != 1) {
+				ship5Btn.image.color = Color.white;
+			}
 		}
 		if ((gameManager.shipIndex == 3) && (gameManager.count3 != 1)) {
 			ship3Btn.image.color = pressed;
-			ship2Btn.image.color = Color.white;
-			ship1Btn.image.color = Color.white;
-			ship4Btn.image.color = Color.white;
-			ship5Btn.image.color = Color.white;
+			if (gameManager.count2 != 1) {
+				ship2Btn.image.color = Color.white;
+			}
+			if (gameManager.count1 != 1) {
+				ship1Btn.image.color = Color.white;
+			}
+			if (gameManager.count4 != 1) {
+				ship4Btn.image.color = Color.white;
+			}
+			if (gameManager.count5 != 1) {
+				ship5Btn.image.color = Color.white;
+			}
 		}
 		if ((gameManager.shipIndex == 4) && (gameManager.count4 != 1)) {
 			ship4Btn.image.color = pressed;
-			ship2Btn.image.color = Color.white;
-			ship3Btn.image.color = Color.white;
-			ship1Btn.image.color = Color.white;
-			ship5Btn.image.color = Color.white;
+			if (gameManager.count2 != 1) {
+				ship2Btn.image.color = Color.white;
+			}
+			if (gameManager.count3 != 1) {
+				ship3Btn.image.color = Color.white;
+			}
+			if (gameManager.count1 != 1) {
+				ship1Btn.image.color = Color.white;
+			}
+			if (gameManager.count5 != 1) {
+				ship5Btn.image.color = Color.white;
+			}
 		}
 		if ((gameManager.shipIndex == 5) && (gameManager.count5 != 1)) {
 			ship5Btn.image.color = pressed;
-			ship2Btn.image.color = Color.white;
-			ship3Btn.image.color = Color.white;
-			ship4Btn.image.color = Color.white;
-			ship1Btn.image.color = Color.white;
+			if (gameManager.count2 != 1) {
+				ship2Btn.image.color = Color.white;
+			}
+			if (gameManager.count3 != 1) {
+				ship3Btn.image.color = Color.white;
+			}
+			if (gameManager.count4 != 1) {
+				ship4Btn.image.color = Color.white;
+			}
+			if (gameManager.count1 != 1) {
+				ship1Btn.image.color = Color.white;
+			}
 		}
 
 	}

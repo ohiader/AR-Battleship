@@ -11,9 +11,6 @@ public class MaybeThisWillWork : MonoBehaviour {
 	public static GameObject battleShip4;
 	public static GameObject battleShip5;
 
-	bool check4 = true;
-	bool check5 = true;
-
 	public Material inactive = null;
 	public Material active = null;
 
@@ -31,7 +28,7 @@ public class MaybeThisWillWork : MonoBehaviour {
 					if (gameObject.name.Equals(player1.name)) {
 						if (gameObject.GetComponent<Renderer>().material.name.Contains("grid")) {
 							if (gameManager.shipIndex == 1 && gameManager.Ship1 <= 1) {
-								if (gameManager.Ship1 != 2 && isAdjacent(i, j)) {
+								if (gameManager.Ship1 != 2 && isAdjacent (i, j)) {
 									player1.transform.tag = "Ship1";
 									gameManager.Ship1++;
 									//Debug.Log (gameManager.Ship1 + "");
@@ -46,13 +43,17 @@ public class MaybeThisWillWork : MonoBehaviour {
 									gameManager.b1.SetActive (true);
 									Debug.Log (gameManager.b1.activeSelf);
 									gameManager.b1.transform.position = gameManager.shipTransform1.position;
+									gameManager.b1.transform.localEulerAngles = new Vector3 (0, 0, 0);
+									gameManager.b1.transform.Translate(new Vector3(0, 0.4f, 0));
 									if (gameManager.ship1Dir == 1) { //vertical
-										gameManager.b1.transform.localEulerAngles = new Vector3(0,90,0); //.RotateAround (gameManager.b1.transform.position, Vector3.forward, 90);
+										gameManager.b1.transform.localEulerAngles = new Vector3 (0, 90, 0);
+										gameManager.b1.transform.Translate(new Vector3(0, 0, 0.5f));
+									} else {
+										gameManager.b1.transform.Translate (new Vector3 (0, 0, 0.5f));
 									}
 								}
-							}
-							else if (gameManager.shipIndex == 2 && gameManager.Ship2 <= 2 ) {
-								if (gameManager.Ship2 != 3 && isAdjacent(i, j)) {
+							} else if (gameManager.shipIndex == 2 && gameManager.Ship2 <= 2) {
+								if (gameManager.Ship2 != 3 && isAdjacent (i, j)) {
 									player1.transform.tag = "Ship2";
 									gameManager.Ship2++;
 									//Debug.Log (gameManager.Ship2 + "");
@@ -64,14 +65,16 @@ public class MaybeThisWillWork : MonoBehaviour {
 								}
 								if (gameManager.Ship2 == 3) {
 									gameManager.count2 = 1;
-									gameManager.b2.SetActive(true);
+									gameManager.b2.SetActive (true);
 									gameManager.b2.transform.position = gameManager.shipTransform2.position;
+									gameManager.b2.transform.localEulerAngles = new Vector3 (0, 0, 0);
+									gameManager.b2.transform.Translate(new Vector3(0, 0.4f, 0));
 									if (gameManager.ship2Dir == 1) { //vertical
-										gameManager.b2.transform.localEulerAngles = new Vector3(0,90,0);									}
+										gameManager.b2.transform.localEulerAngles = new Vector3 (0, 90, 0);
+									}
 								}
-							}
-							else if (gameManager.shipIndex == 3 && gameManager.Ship3 <= 3 ) {
-								if (gameManager.Ship3 != 3 && isAdjacent(i, j)) {
+							} else if (gameManager.shipIndex == 3 && gameManager.Ship3 <= 3) {
+								if (gameManager.Ship3 != 3 && isAdjacent (i, j)) {
 									player1.transform.tag = "Ship3";
 									gameManager.Ship3++;
 									//Debug.Log (gameManager.Ship3 + "");
@@ -83,10 +86,15 @@ public class MaybeThisWillWork : MonoBehaviour {
 								}
 								if (gameManager.Ship3 == 3) {
 									gameManager.count3 = 1;
-									gameManager.b3.SetActive(true);
+									gameManager.b3.SetActive (true);
 									gameManager.b3.transform.position = gameManager.shipTransform3.position;
+									gameManager.b3.transform.Translate(new Vector3(0, 0.4f, 0));
 									if (gameManager.ship3Dir == 1) { //vertical
-										gameManager.b3.transform.localEulerAngles = new Vector3(0,90,0);									} 
+										gameManager.b3.transform.localEulerAngles = new Vector3 (0, 90, 0);
+										gameManager.b3.transform.Translate(new Vector3(0, 0, 1.5f));
+									} else {
+										gameManager.b3.transform.Translate (new Vector3 (0, 0, 1.5f));
+									}
 								}
 							}
 							else if (gameManager.shipIndex == 4 && gameManager.Ship4 <= 4 ) {
@@ -104,9 +112,13 @@ public class MaybeThisWillWork : MonoBehaviour {
 									gameManager.count4 = 1;
 									gameManager.b4.SetActive(true);
 									gameManager.b4.transform.position = gameManager.shipTransform4.position;
-									if (gameManager.ship4Dir == 2 && check4) { //horizontal
-										gameManager.b4.transform.localEulerAngles = new Vector3(0, -90, 0);
-											check4 = false;
+									gameManager.b4.transform.localEulerAngles = new Vector3 (0, 0, 0);
+									gameManager.b4.transform.Translate(new Vector3(0, 0.4f, 0));
+									if (gameManager.ship4Dir == 1) { //vertical
+										gameManager.b4.transform.localEulerAngles = new Vector3 (0, 90, 0);
+										gameManager.b4.transform.Translate(new Vector3(0, 0, 0.5f));
+									} else {
+										gameManager.b4.transform.Translate (new Vector3(0, 0, 0.8f));
 									}
 								}
 							}
@@ -125,9 +137,10 @@ public class MaybeThisWillWork : MonoBehaviour {
 									gameManager.count5 = 1;
 									gameManager.b5.SetActive(true);
 									gameManager.b5.transform.position = gameManager.shipTransform5.position;
-									if (gameManager.ship5Dir == 1 && check5) { //vertical
+									gameManager.b5.transform.localEulerAngles = new Vector3 (0, 0, 0);
+									gameManager.b5.transform.Translate(new Vector3(0, 0.4f, 0));
+									if (gameManager.ship5Dir == 1) { //vertical
 										gameManager.b5.transform.localEulerAngles = new Vector3(0,90,0);
-										check5 = false;
 									}
 								}
 							}
@@ -212,7 +225,6 @@ public class MaybeThisWillWork : MonoBehaviour {
 
 		}
 	}
-
 
 	public bool isAdjacent(int i, int j) {
 
