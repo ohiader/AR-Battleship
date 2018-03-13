@@ -44,6 +44,7 @@ public class MaybeThisWillWork : MonoBehaviour {
 								if (gameManager.Ship1 == 2) {
 									gameManager.count1 = 1;
 									gameManager.b1.SetActive (true);
+									Debug.Log (gameManager.b1.activeSelf);
 									gameManager.b1.transform.position = gameManager.shipTransform1.position;
 									if (gameManager.ship1Dir == 1) { //vertical
 										gameManager.b1.transform.localEulerAngles = new Vector3(0,90,0); //.RotateAround (gameManager.b1.transform.position, Vector3.forward, 90);

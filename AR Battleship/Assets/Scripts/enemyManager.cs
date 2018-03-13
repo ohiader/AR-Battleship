@@ -7,11 +7,7 @@ public class enemyManager : MonoBehaviour {
 	public static GameObject[,] enemyBoard;
 	public static int enemyShips = 5;
 
-	Ship ship1;
-	Ship ship2;
-	Ship ship3;
-	Ship ship4;
-	Ship ship5;
+	Ship ship1, ship2, ship3, ship4, ship5;
 
 	public static int health1 = 2;
 	public static int health2 = 3;
@@ -23,14 +19,11 @@ public class enemyManager : MonoBehaviour {
 	public static bool flag = false;
 	public static enemyManager instance = null;
 
+
 	// use to report to GUI if hit(1) or miss(0)
 	public static int reportBack = 2;
 
-	public GameObject battleship1;
-	public GameObject battleship2;
-	public GameObject battleship3;
-	public GameObject battleship4;
-	public GameObject battleship5;
+	public GameObject battleship1, battleship2, battleship3, battleship4, battleship5;
 
 	public Material inactive = null;
 	public Material active = null;
@@ -61,16 +54,22 @@ public class enemyManager : MonoBehaviour {
 			{
 				for (int j = 0; j < 10; j++)
 				{
-					if (ToggleSettings.scaleToggle) {
-						enemyBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i * 3.0f, 0, (float)j * 3.0f), Quaternion.identity);
-						enemyBoard [i, j].transform.localScale = new Vector3 (0.3f, 1.0f, 0.3f);
-						enemyBoard[i, j].transform.position += new Vector3 (-12.0f, 1.0f, -6.0f);
-					} else {
-						enemyBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
-						//enemyBoard[i, j].transform.position += new Vector3 (-4.0f, 1.0f, 6.0f);
-					}
+				if (ToggleSettings.scaleToggle) {
+					enemyBoard [i, j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i * 3.0f, 0, (float)j * 3.0f), Quaternion.identity);
+					//enemyBoard [i, j].transform.localScale = new Vector3 (0.3f, 1.0f, 0.3f);
+					//enemyBoard[i, j].transform.position += new Vector3(-4, 1.0f, -6);
+				} else {
+					enemyBoard [i, j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
+				}
 					enemyBoard[i, j].transform.parent = transform;
-					enemyBoard [i, j].name = "gridPoint" + index;
+
+                    //enemyBoard[i, j].transform.position = new Vector3(enemyBoard[i, j].transform.position.x, 53, enemyBoard[i, j].transform.position.z);
+
+                    enemyBoard[i, j].transform.position = gameManager.playerBoard[i, j].transform.position;
+                    enemyBoard[i, j].transform.rotation = gameManager.playerBoard[i, j].transform.rotation;
+                    enemyBoard[i, j].transform.localScale = gameManager.playerBoard[i, j].transform.localScale;
+
+                    enemyBoard[i, j].name = "gridPoint" + index;
 					enemyBoard [i, j].tag = "Inactive";
 					enemyBoard [i, j].GetComponent<ParticleSystem> ().Pause ();
 					index++;

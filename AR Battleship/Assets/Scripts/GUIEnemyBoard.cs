@@ -42,7 +42,7 @@ public class GUIEnemyBoard : MonoBehaviour {
 	}
 
 	public void closeAimPanel() {
-		Destroy (aimForShipsPanel);
+		aimForShipsPanel.SetActive (false);
 		if (!ToggleSettings.UiToggle) {
 			shootBtn.SetActive (true);
 		}

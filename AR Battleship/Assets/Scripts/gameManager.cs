@@ -11,29 +11,13 @@ public class gameManager : MonoBehaviour {
 	public string level;
 	public static gameManager instance = null;
 
-	public static Ship ship1;
-	public static Ship ship2;
-	public static Ship ship3;
-	public static Ship ship4;
-	public static Ship ship5;
+	public static Ship ship1, ship2, ship3, ship4, ship5;
 
-	public GameObject battleship1;
-	public GameObject battleship2;
-	public GameObject battleship3;
-	public GameObject battleship4;
-	public GameObject battleship5;
+	public GameObject battleship1, battleship2, battleship3, battleship4, battleship5;
 
-	public static GameObject b1;
-	public static GameObject b2;
-	public static GameObject b3;
-	public static GameObject b4;
-	public static GameObject b5;
+	public static GameObject b1, b2, b3, b4, b5;
 
-	public static Transform shipTransform1;
-	public static Transform shipTransform2;
-	public static Transform shipTransform3;
-	public static Transform shipTransform4;
-	public static Transform shipTransform5;
+	public static Transform shipTransform1, shipTransform2, shipTransform3, shipTransform4, shipTransform5;
 
 	public static int Ship1 = 0;
 	public static int Ship2 = 0;
@@ -94,23 +78,35 @@ public class gameManager : MonoBehaviour {
 				if (ToggleSettings.scaleToggle) {
 					playerBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i * 3.0f, 0, (float)j * 3.0f), Quaternion.identity);
 					playerBoard [i, j].transform.localScale = new Vector3 (0.3f, 1.0f, 0.3f);
-					playerBoard[i, j].transform.position += new Vector3 (-14.0f, 1.0f, -3.0f);
+					playerBoard[i, j].transform.position += new Vector3 (-4, 1.5f, -6);
 				} else {
 					playerBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
-					playerBoard[i, j].transform.localPosition += new Vector3 (-4.0f, 1.0f, 6.0f);
+					playerBoard[i, j].transform.position += new Vector3 (2.25f, 0.0f, 1.75f);
 				}
-				playerBoard[i,j].transform.parent = transform;
-				playerBoard[i,j].transform.name = "gridPoint" + indexOfBoard;
+
+                playerBoard[i,j].transform.parent = transform;
+
+                playerBoard[i, j].transform.position = new Vector3(playerBoard[i, j].transform.position.x, 15f, playerBoard[i, j].transform.position.z);
+
+                playerBoard[i,j].transform.name = "gridPoint" + indexOfBoard;
 				playerBoard [i, j].tag = "Inactive";
 				playerBoard[i,j].SetActive (true);
 				indexOfBoard++;
 			}
 		}
-		b1 = battleship1; // Submarine
-		b2 = battleship2; // Scout
-		b3 = battleship3; // Transport
-		b4 = battleship4; // Battleship
-		b5 = battleship5; // Aircraft Carrier
+
+        /*b1 = battleship1;
+		b2 = battleship2;
+		b3 = battleship3;
+		b4 = battleship4;
+		b5 = battleship5;*/
+
+		b1 = this.gameObject.transform.GetChild (0).gameObject;
+		b2 = this.gameObject.transform.GetChild (1).gameObject;
+		b3 = this.gameObject.transform.GetChild (2).gameObject;
+		b4 = this.gameObject.transform.GetChild (3).gameObject;
+		b5 = this.gameObject.transform.GetChild (4).gameObject;
+
 		if (ToggleSettings.scaleToggle) {
 			b1.transform.localScale = new Vector3 (8.0f, 8.0f, 8.0f);
 			b2.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
@@ -118,8 +114,6 @@ public class gameManager : MonoBehaviour {
 			b4.transform.localScale = new Vector3 (6.0f, 6.0f, 6.0f);
 			b5.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
 		}
-
-
 	}
 
 	public void DonePlacingShips()
@@ -158,11 +152,4 @@ public class gameManager : MonoBehaviour {
 	{
 		shipIndex = 5;
 	}
-
-	// Update is called once per frame
-	void Update () {
-
-	}
-
-
 } 

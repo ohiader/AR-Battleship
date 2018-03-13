@@ -29,7 +29,7 @@ public class Loader : MonoBehaviour {
 		GameManager.transform.GetChild (0).GetChild (0).gameObject.SetActive (true);
 			
 		if (ToggleSettings.scaleToggle) {
-			GameManager.transform.GetChild (0).GetChild (2).gameObject.transform.localScale = new Vector3 (1.545455f * 3.0f, 0.3863636f, 1.545455f * 3.0f);
+			GameManager.transform.GetChild (0).GetChild (2).gameObject.transform.localScale = new Vector3 (1.1f * 3.0f, 0.2f, 1.1f * 3.0f);
 		}
 		/*} else {
 			if (enemyManager.instance == null) {

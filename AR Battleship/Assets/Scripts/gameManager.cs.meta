@@ -1,11 +1,23 @@
 fileFormatVersion: 2
 guid: 69fc9edbb5d0b4809ab8377b99f56298
-timeCreated: 1508976212
+timeCreated: 1520973311
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gridPoint: {fileID: 1165266710667072, guid: b09f3bdc8305c407baa16a7fd41257f1,
+      type: 2}
+  - battleship1: {fileID: 1295672682410234, guid: 8ae5c3e795fbe43b7844a9820788ce84,
+      type: 2}
+  - battleship2: {fileID: 1090791059591578, guid: 9d3a4ddf935a84956bcfcadfe4774ec3,
+      type: 2}
+  - battleship3: {fileID: 1367127629328238, guid: dcb0a38c9a4104f8682b40175565fe14,
+      type: 2}
+  - battleship4: {fileID: 1431687764835400, guid: ea679d7d7583549d6895656a73140476,
+      type: 2}
+  - battleship5: {fileID: 1330509834030512, guid: 4bdc88364af404331b056a700952733e,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
