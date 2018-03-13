@@ -85,7 +85,6 @@ public class gameManager : MonoBehaviour {
 
 		//    DontDestroyOnLoad(gameManager.playerBoard);
 		playerBoard = new GameObject[10,10];
-
 		int indexOfBoard = 0;
 
 		for (int i = 0; i < 10; i++)
@@ -98,7 +97,7 @@ public class gameManager : MonoBehaviour {
 					playerBoard[i, j].transform.position += new Vector3 (-14.0f, 1.0f, -3.0f);
 				} else {
 					playerBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
-					playerBoard[i, j].transform.position += new Vector3 (-4.0f, 1.0f, 6.0f);
+					playerBoard[i, j].transform.localPosition += new Vector3 (-4.0f, 1.0f, 6.0f);
 				}
 				playerBoard[i,j].transform.parent = transform;
 				playerBoard[i,j].transform.name = "gridPoint" + indexOfBoard;

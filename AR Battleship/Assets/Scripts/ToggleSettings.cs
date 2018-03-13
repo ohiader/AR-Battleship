@@ -7,7 +7,7 @@ public class ToggleSettings : MonoBehaviour {
 
 	public Toggle scale, ui, transition, selection;
 	public GameObject panel;
-	public static bool scaleToggle, selectionToggle;
+	public static bool scaleToggle, selectionToggle, UiToggle;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +38,11 @@ public class ToggleSettings : MonoBehaviour {
 
 	public void toggleUI() {
 		//switch between 2d fixed UI and 3D AR ui
+		if (ui.isOn) {
+			UiToggle = true;
+		} else {
+			UiToggle = false;
+		}
 	}
 
 	public void toggleTransitions() {

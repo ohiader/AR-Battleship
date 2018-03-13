@@ -40,6 +40,12 @@ public class Loader : MonoBehaviour {
 		if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Menu")) {
 			
 		}
+
+		if (ToggleSettings.UiToggle) {
+			GameManager.transform.GetChild (1).gameObject.SetActive (true);
+		} else if (!ToggleSettings.UiToggle) {
+			GameManager.transform.GetChild (1).gameObject.SetActive (false);
+		}
 	}
 
 	// Update is called once per frame

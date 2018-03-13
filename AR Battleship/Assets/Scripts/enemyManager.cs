@@ -23,6 +23,9 @@ public class enemyManager : MonoBehaviour {
 	public static bool flag = false;
 	public static enemyManager instance = null;
 
+	// use to report to GUI if hit(1) or miss(0)
+	public static int reportBack = 2;
+
 	public GameObject battleship1;
 	public GameObject battleship2;
 	public GameObject battleship3;
@@ -31,8 +34,11 @@ public class enemyManager : MonoBehaviour {
 
 	public Material inactive = null;
 	public Material active = null;
-	public Material miss = null;
-	public Material hit = null;
+	public Material missMat = null;
+	public Material hitMat = null;
+
+	public static Material miss = null;
+	public static Material hit = null;
 
 	void Awake() {
 		/*if (instance == null)
@@ -46,6 +52,8 @@ public class enemyManager : MonoBehaviour {
 
 	// Use this for initialization
 	void InitGame () {
+		miss = missMat;
+		hit = hitMat;
 		int index = 0;
 		enemyBoard = new GameObject[10,10];
 
@@ -59,7 +67,7 @@ public class enemyManager : MonoBehaviour {
 						enemyBoard[i, j].transform.position += new Vector3 (-12.0f, 1.0f, -6.0f);
 					} else {
 						enemyBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
-						enemyBoard[i, j].transform.position += new Vector3 (-4.0f, 1.0f, 6.0f);
+						//enemyBoard[i, j].transform.position += new Vector3 (-4.0f, 1.0f, 6.0f);
 					}
 					enemyBoard[i, j].transform.parent = transform;
 					enemyBoard [i, j].name = "gridPoint" + index;
@@ -230,7 +238,7 @@ public class enemyManager : MonoBehaviour {
 		Debug.Log (health5);
 	}
 		
-	bool isShipHit(GameObject selection) {
+	public static bool isShipHit(GameObject selection) {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
 				//find specific ship
@@ -265,7 +273,7 @@ public class enemyManager : MonoBehaviour {
 		return false;
 	}
 
-	void isShipSunk(Ship ship) {
+	public static void isShipSunk(Ship ship) {
 		if (health1 == 0) {
 			enemyShips--;
 			health1 = -1;
@@ -296,26 +304,26 @@ public class enemyManager : MonoBehaviour {
 	// function for button, check if ship is sunk
 	// if no hit, make "Miss!" appear and OK button to move to playerBoard scene
 	// if all ships are sunk go to gameOver scene
-	public void shoot() {
+	public static void shoot() {
 		// check if target is a ship
 		if (ToggleSettings.selectionToggle) {
 			if (IndirectSelection.target.tag.StartsWith("Eship")) {
 				if (isShipHit (IndirectSelection.target)) {
 					//flag = false;
+					reportBack = 1;
 					Debug.Log(IndirectSelection.target.name);
 					IndirectSelection.chosenSpot = false;
 				}
 			} else {
 				//pop up "Miss!"
 				//flag = false;
+				reportBack = 0;
 				IndirectSelection.target.tag = "miss";
 				Debug.Log("Miss1!");
 				IndirectSelection.target.GetComponent<Renderer>().material = miss;
 				//Application.DontDestroyOnLoad(Application.);
 				//Application.DontDestroyOnLoad (notLoaded2);
 				IndirectSelection.chosenSpot = false;
-				Color color = new Color(0.2f, 0.2f, 0.2f, 1.0f);
-				Initiate.Fade("playerBoard", color, 2.0f);
 				//Application.LoadLevel("playerBoard");
 			}
 		} else {
@@ -324,12 +332,14 @@ public class enemyManager : MonoBehaviour {
 			}
 			else if (PlayerShoot.targetedShip.tag.StartsWith("Eship")) {
 				if (isShipHit (PlayerShoot.targetedShip)) {
+					reportBack = 1;
 					flag = false;
 					Debug.Log(PlayerShoot.targetedShip.name);
 					PlayerShoot.chosenSpot = false;
 				}
 			} else {
 				//pop up "Miss!"
+				reportBack = 0;
 				flag = false;
 				PlayerShoot.targetedShip.tag = "miss";
 				Debug.Log("Miss!");
@@ -337,8 +347,6 @@ public class enemyManager : MonoBehaviour {
 				//Application.DontDestroyOnLoad(Application.);
 				//Application.DontDestroyOnLoad (notLoaded2);
 				PlayerShoot.chosenSpot = false;
-				Color color = new Color(0.2f, 0.2f, 0.2f, 1.0f);
-				Initiate.Fade("playerBoard", color, 2.0f);
 				//Application.LoadLevel("playerBoard");
 			}
 		}

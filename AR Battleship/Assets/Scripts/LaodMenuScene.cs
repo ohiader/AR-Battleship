@@ -2,17 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LaodMenuScene : MonoBehaviour {
 
 	public void LoadMenuScene()
 	{
 		Destroy(Music.music);
-		Application.LoadLevel("Menu");
+		SceneManager.LoadScene ("Menu");
 	}
 	public void LoadGameScene()
 	{
-		Application.LoadLevel("placeShips");
+		SceneManager.LoadScene ("placeShips");
 	}
 
 	public void Start()

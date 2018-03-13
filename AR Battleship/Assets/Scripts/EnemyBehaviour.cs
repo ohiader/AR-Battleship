@@ -8,6 +8,8 @@ public class EnemyBehaviour : MonoBehaviour {
 	public Material miss = null;
 	public Material hit = null;
 
+	public GameObject missPanel, AiWinPanel;
+
 	public int i;
 	public int j;
 	public static bool horizontalSearch = true;
@@ -84,8 +86,7 @@ public class EnemyBehaviour : MonoBehaviour {
 				//Move to enemyBoard scene
 				Debug.Log ("AI miss");
 				gameManager.playerBoard[i,j].GetComponent<Renderer> ().material = miss;
-
-				//				}
+				missPanel.SetActive (true);
 			} else if (gameManager.playerBoard[i, j].tag.StartsWith ("Ship")) {
 				// This will be a hit
 				Debug.Log ("AI hit");
@@ -117,65 +118,68 @@ public class EnemyBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Guess a target 
+		float phasePeriod = 10.0f;
+		float modTime = Time.time % phasePeriod;
 
-		while (find) {
-			searching = true;
-			//look for adjacent
-			if (horizontalSearch) {
-				if (i == 9) {
-					i--;
-				} else if (i == 0) {
-					i++;
-				} else if (leftOrRight == 0) { // search to the right 
-					i++;
-				} else {
-					i--;
-				}
+		//look for adjacent
+		if (horizontalSearch) {
+			if (i == 9) {
+				i--;
+			} else if (i == 0) {
+				i++;
+			} else if (leftOrRight == 0) { // search to the right 
+				i++;
 			} else {
-				if (j == 9) {
-					j--;
-				} else if (j == 0) {
-					j++;
-				} else if (upOrDown == 0) { // search up 
-					j++;
-				} else {
-					j--;
-				}
+				i--;
 			}
-
-			if (gameManager.playerShips != 0) {
-				//Check if the spot has not already been hit
-				if (gameManager.playerBoard [i, j].tag.CompareTo("Inactive") == 0) {
-					//This will result in a miss
-					//Move to enemyBoard scene
-					Debug.Log ("AI miss");
-					find = false;
-					gameManager.playerBoard[i,j].GetComponent<Renderer> ().material = miss;
-				} else if (gameManager.playerBoard [i, j].tag.StartsWith ("Ship")) {
-					// This will be a hit
-					Debug.Log ("AI hit");
-					gameManager.playerBoard[i,j].GetComponent<Ship>().takeDamage ();
-					gameManager.playerBoard[i,j].GetComponent<Renderer>().material = hit;
-					searching = true;
-					if (gameManager.playerBoard[i,j].GetComponent<Ship>().isSunk ()) {
-						gameManager.playerShips--;
-						//change i and j
-						i = (int) Random.Range (0, 9);
-						j = (int) Random.Range (0, 9);
-						leftOrRight = (int)Random.Range (0, 1);
-						upOrDown = (int)Random.Range (0, 1);
-						searching = false;
-					} 
-				}
+		} else {
+			if (j == 9) {
+				j--;
+			} else if (j == 0) {
+				j++;
+			} else if (upOrDown == 0) { // search up 
+				j++;
 			} else {
-				find = false;
-				Debug.Log ("AI win");
-				Color color = new Color(0.2f, 0.2f, 0.2f, 1.0f);
-				Initiate.Fade("GameOver", color, 2.0f);
-				//Application.LoadLevel ("GameOver");
+				j--;
 			}
 		}
-
+		searching = true;
+		if (find) {
+			if (modTime < 1) {
+				if (gameManager.playerShips != 0) {
+					//Check if the spot has not already been hit
+					if (gameManager.playerBoard [i, j].tag.CompareTo("Inactive") == 0) {
+						//This will result in a miss
+						//Move to enemyBoard scene
+						Debug.Log ("AI miss");
+						gameManager.playerBoard[i,j].GetComponent<Renderer> ().material = miss;
+						missPanel.SetActive (true);
+						find = false;
+					} else if (gameManager.playerBoard [i, j].tag.StartsWith ("Ship")) {
+						// This will be a hit
+						Debug.Log ("AI hit");
+						gameManager.playerBoard[i,j].GetComponent<Ship>().takeDamage ();
+						gameManager.playerBoard[i,j].GetComponent<Renderer>().material = hit;
+						searching = true;
+						if (gameManager.playerBoard[i,j].GetComponent<Ship>().isSunk ()) {
+							gameManager.playerShips--;
+							//change i and j
+							i = (int) Random.Range (0, 9);
+							j = (int) Random.Range (0, 9);
+							leftOrRight = (int)Random.Range (0, 1);
+							upOrDown = (int)Random.Range (0, 1);
+							searching = false;
+						}
+						find = true;
+					}
+				} else {
+					find = false;
+					Debug.Log ("AI win");
+					AiWinPanel.SetActive (true);
+					//Application.LoadLevel ("GameOver");
+				}
+			}
+		}
 		//Application.LoadLevel ("enemyBoard");
 	}
 
@@ -183,6 +187,11 @@ public class EnemyBehaviour : MonoBehaviour {
 		Color color = new Color(0.2f, 0.2f, 0.2f, 1.0f);
 		Initiate.Fade("enemyBoard", color, 2.0f);
 		//Application.LoadLevel ("enemyBoard");
+	}
+
+	public void goToGameOver() {
+		Color color = new Color(0.2f, 0.2f, 0.2f, 1.0f);
+		Initiate.Fade("GameOver", color, 2.0f);
 	}
 
 }
