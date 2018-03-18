@@ -37,10 +37,10 @@ public class IndirectSelection : MonoBehaviour {
 				}
 				if (selected != old) {
 					//Debug.Log ("AAAAAAAAA");
-					if (!old.GetComponent<Renderer> ().material.name.Contains("miss") && !old.GetComponent<Renderer> ().material.name.Contains ("hit")) {
+					if (old.gameObject.tag != "miss" && old.gameObject.tag != "hit") {
 						old.GetComponent<Renderer> ().material = inactive;
 					}
-					if (!selected.GetComponent<Renderer> ().material.name.Contains("miss") && !selected.GetComponent<Renderer> ().material.name.Contains ("hit")) {
+					if (selected.gameObject.tag != "miss" && selected.gameObject.tag != "hit") {
 						selected.GetComponent<Renderer> ().material = active;
 					}
 
@@ -59,13 +59,13 @@ public class IndirectSelection : MonoBehaviour {
 								target = enemyManager.enemyBoard [i, j];
 								Debug.Log ("Targeted: " + target.name);
 
-							if (selected.GetComponent<Renderer>().material.name.Contains("miss")) { // if (gameObject.GetComponent<Renderer>().material.Equals(active)) 
+							if (selected.gameObject.tag == "miss") { // if (gameObject.GetComponent<Renderer>().material.Equals(active)) 
 								//enemyManager.flag = false;
 								enemyManager.enemyBoard[i, j].GetComponent<Renderer> ().material = miss;
 								Debug.Log ("here2");
 
 							}
-							else if (selected.GetComponent<Renderer>().material.name.Contains ("hit")) { // if (gameObject.GetComponent<Renderer>().material.Equals(active)) 
+							else if (selected.gameObject.tag == "hit") { // if (gameObject.GetComponent<Renderer>().material.Equals(active)) 
 								//enemyManager.flag = false;
 								enemyManager.enemyBoard[i, j].GetComponent<Renderer> ().material = boom;
 								Debug.Log ("here3");

@@ -32,7 +32,7 @@ public class VirtualShoot : MonoBehaviour, IVirtualButtonEventHandler {
 			// Increase Y scale to make button look released
 			shootObj.transform.localScale = new Vector3(0.7692308f, 1.2f, 0.7692308f);
 			// shoot
-			enemyManager.shoot();
+			//shoot();
 		}
 		Debug.Log ("Released");
 	}

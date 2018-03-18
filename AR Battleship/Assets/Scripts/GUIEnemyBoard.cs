@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GUIEnemyBoard : MonoBehaviour {
 
-	public GameObject scope, aimForShipsPanel, shootBtn, updatePanel, missPanel;
+	public GameObject scope, aimForShipsPanel, shootBtn, updatePanel, toPlayerBoardBtn, enemyBoardPrefab;
 	public Text updateText;
 
 
@@ -25,20 +25,19 @@ public class GUIEnemyBoard : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (enemyBoardPrefab.activeSelf) {
+			aimForShipsPanel.SetActive (true);
+		}
+
 		// if it is a miss
 		if (enemyManager.reportBack == 0) {
 			updatePanel.SetActive (false);
 			shootBtn.SetActive (false);
-			missPanel.SetActive (true);
+			toPlayerBoardBtn.SetActive (true);
 		} else if (enemyManager.reportBack == 1) {
 			updateText.color = Color.green;
 			updateText.text = "Hit! Shoot again.";
 		}
-	}
-
-	void Awake () {
-		aimForShipsPanel.SetActive (true);
-		shootBtn.SetActive (false);
 	}
 
 	public void closeAimPanel() {
@@ -46,12 +45,10 @@ public class GUIEnemyBoard : MonoBehaviour {
 		if (!ToggleSettings.UiToggle) {
 			shootBtn.SetActive (true);
 		}
-		updatePanel.SetActive (true);
 	}
 
-	public void closeMissPanel() {
-		Color color = new Color(0.2f, 0.2f, 0.2f, 1.0f);
-		Initiate.Fade("playerBoard", color, 2.0f);
+	public void toPlayerBoard() {
+		updateText.text = "Moving to player board";
 	}
 
 }

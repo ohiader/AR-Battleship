@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour {
 	public GameObject gridPoint;
@@ -57,9 +58,11 @@ public class gameManager : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 		} else if (instance != this) {
-			Destroy (gameObject.transform.parent.transform.parent);
+			// Destroy (gameObject.transform.parent.transform.parent);
+			Destroy (gameObject.transform.parent);
 		}
-		DontDestroyOnLoad (gameObject.transform.parent.transform.parent);
+		//DontDestroyOnLoad (gameObject.transform.parent.transform.parent);
+		DontDestroyOnLoad (gameObject.transform.parent);
 		InitGame ();
 	}
 
@@ -81,12 +84,12 @@ public class gameManager : MonoBehaviour {
 					playerBoard[i, j].transform.position += new Vector3 (-4, 1.5f, -6);
 				} else {
 					playerBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
-					playerBoard[i, j].transform.position += new Vector3 (2.25f, 0.0f, 1.75f);
+					playerBoard[i, j].transform.position += new Vector3 (-1.5f, 0.0f, -8.5f);
 				}
 
                 playerBoard[i,j].transform.parent = transform;
 
-                playerBoard[i, j].transform.position = new Vector3(playerBoard[i, j].transform.position.x, 15f, playerBoard[i, j].transform.position.z);
+                playerBoard[i, j].transform.position = new Vector3(playerBoard[i, j].transform.position.x, 18f, playerBoard[i, j].transform.position.z);
 
                 playerBoard[i,j].transform.name = "gridPoint" + indexOfBoard;
 				playerBoard [i, j].tag = "Inactive";

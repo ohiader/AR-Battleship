@@ -12,12 +12,12 @@ public class EnemyLoader : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		if (gameManager.instance != null) {
-			Loader.GameManager.transform.GetChild (0).GetChild (1).gameObject.SetActive (true);
-			Loader.GameManager.transform.GetChild (0).GetChild (0).gameObject.SetActive (false);
+			NewLoader.GameManager.transform.GetChild (1).gameObject.SetActive (true);
+			NewLoader.GameManager.transform.GetChild (0).gameObject.SetActive (false);
 		}else if (enemyManager.instance == null) {
 				Debug.Log ("Made Enemy Manager");
-				Loader.EnemyManager = (GameObject)Instantiate(Resources.Load("EnemyGameManager"));
-				Loader.EnemyManager.SetActive (true);
+				NewLoader.EnemyManager = (GameObject)Instantiate(Resources.Load("EnemyGameManager"));
+				NewLoader.EnemyManager.SetActive (true);
 			}
 	}
 

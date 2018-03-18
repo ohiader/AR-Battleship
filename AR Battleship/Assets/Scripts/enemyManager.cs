@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vuforia;
 
-public class enemyManager : MonoBehaviour {
+public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 	public GameObject gridPoint;
 	public static GameObject[,] enemyBoard;
 	public static int enemyShips = 5;
@@ -33,6 +34,8 @@ public class enemyManager : MonoBehaviour {
 	public static Material miss = null;
 	public static Material hit = null;
 
+	public GameObject shootObj, vShootButton;
+
 	void Awake() {
 		/*if (instance == null)
 			instance = this;
@@ -41,6 +44,13 @@ public class enemyManager : MonoBehaviour {
 
 		DontDestroyOnLoad (gameObject);*/
 		InitGame ();
+	}
+
+	void Start () {
+		vShootButton = GameObject.Find ("VShootButton");
+		if (vShootButton != null) {
+			vShootButton.GetComponent<VirtualButtonBehaviour> ().RegisterEventHandler (this);
+		}
 	}
 
 	// Use this for initialization
@@ -192,24 +202,28 @@ public class enemyManager : MonoBehaviour {
 		if (health1 < 0) {
 			Debug.Log ("show ship 1");
 			this.transform.GetChild(0).gameObject.SetActive (true);
+			this.transform.GetChild (0).gameObject.transform.localPosition = new Vector3 (2.64f, -3.32f, 0.94f);
 			if (ToggleSettings.scaleToggle) {
 				this.transform.GetChild (0).gameObject.transform.localScale = new Vector3 (8.0f, 8.0f, 8.0f);
 			}
 		}
 		if (health2 < 0) {
 			this.transform.GetChild(1).gameObject.SetActive (true);
+			this.transform.GetChild (1).gameObject.transform.localPosition = new Vector3 (3.87f, -3.28f, -2.1f);
 			if (ToggleSettings.scaleToggle) {
 				this.transform.GetChild (1).gameObject.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
 			}
 		}
 		if (health3 < 0) {
 			this.transform.GetChild(2).gameObject.SetActive (true);
+			this.transform.GetChild (2).gameObject.transform.localPosition = new Vector3 (1.36f, -3.25f, -4.08f);
 			if (ToggleSettings.scaleToggle) {
 				this.transform.GetChild (2).gameObject.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
 			}
 		}
 		if (health4 < 0) {
 			this.transform.GetChild(3).gameObject.SetActive (true);
+			this.transform.GetChild (3).gameObject.transform.localPosition = new Vector3 (6.75f, -3.12f, -2.21f);
 			if (ToggleSettings.scaleToggle) {
 				this.transform.GetChild (3).gameObject.transform.localScale = new Vector3 (6.0f, 6.0f, 6.0f);
 			}
@@ -217,6 +231,7 @@ public class enemyManager : MonoBehaviour {
 		if (health5 < 0) {
 			Debug.Log ("show ship 5");
 			this.transform.GetChild(4).gameObject.SetActive (true);
+			this.transform.GetChild (4).gameObject.transform.localPosition = new Vector3 (6.04f, -3.16f, -2.1f);
 			if (ToggleSettings.scaleToggle) {
 				this.transform.GetChild (4).gameObject.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
 			}
@@ -303,7 +318,7 @@ public class enemyManager : MonoBehaviour {
 	// function for button, check if ship is sunk
 	// if no hit, make "Miss!" appear and OK button to move to playerBoard scene
 	// if all ships are sunk go to gameOver scene
-	public static void shoot() {
+	public void shoot() {
 		// check if target is a ship
 		if (ToggleSettings.selectionToggle) {
 			if (IndirectSelection.target.tag.StartsWith("Eship")) {
@@ -350,6 +365,27 @@ public class enemyManager : MonoBehaviour {
 			}
 		}
 	}
+
+	public void OnButtonPressed(VirtualButtonBehaviour vb) {
+		if (vb.gameObject.name == "VShootButton") {
+			// Decrease Y scale to make button look pressed
+			shootObj.transform.localScale = new Vector3(0.7692308f, 0.5f, 0.7692308f);
+		}
+
+		Debug.Log ("Pressed");
+	}
+
+	public void OnButtonReleased(VirtualButtonBehaviour vb) {
+		if (vb.gameObject.name == "VShootButton") {
+			// Increase Y scale to make button look released
+			shootObj.transform.localScale = new Vector3(0.7692308f, 1.2f, 0.7692308f);
+			// shoot
+			shoot();
+		}
+		Debug.Log ("Released");
+	}
+
+
 }
 
 

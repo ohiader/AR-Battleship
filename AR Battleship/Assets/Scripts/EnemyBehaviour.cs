@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour {
 	public Material inactive = null;
@@ -8,7 +9,8 @@ public class EnemyBehaviour : MonoBehaviour {
 	public Material miss = null;
 	public Material hit = null;
 
-	public GameObject missPanel, AiWinPanel;
+	public GameObject toEnemyBoardBtn, aiWinPanel;
+	public Text updateText;
 
 	public int i;
 	public int j;
@@ -24,6 +26,8 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		updateText.text = "Computer is searching";
+
 		if (searching == false) {
 			i = (int)Random.Range (0, 9);
 			j = (int)Random.Range (0, 9);
@@ -86,7 +90,8 @@ public class EnemyBehaviour : MonoBehaviour {
 				//Move to enemyBoard scene
 				Debug.Log ("AI miss");
 				gameManager.playerBoard[i,j].GetComponent<Renderer> ().material = miss;
-				missPanel.SetActive (true);
+				updateText.text = "Computer missed!";
+				toEnemyBoardBtn.SetActive (true);
 			} else if (gameManager.playerBoard[i, j].tag.StartsWith ("Ship")) {
 				// This will be a hit
 				Debug.Log ("AI hit");
@@ -118,7 +123,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Guess a target 
-		float phasePeriod = 10.0f;
+		float phasePeriod = 4.0f;
 		float modTime = Time.time % phasePeriod;
 
 		//look for adjacent
@@ -144,6 +149,10 @@ public class EnemyBehaviour : MonoBehaviour {
 			}
 		}
 		searching = true;
+		if (modTime > 2) {
+			updateText.text = "Computer is searching";
+		}
+
 		if (find) {
 			if (modTime < 1) {
 				if (gameManager.playerShips != 0) {
@@ -153,7 +162,8 @@ public class EnemyBehaviour : MonoBehaviour {
 						//Move to enemyBoard scene
 						Debug.Log ("AI miss");
 						gameManager.playerBoard[i,j].GetComponent<Renderer> ().material = miss;
-						missPanel.SetActive (true);
+						updateText.text = "Computer missed!";
+						toEnemyBoardBtn.SetActive (true);
 						find = false;
 					} else if (gameManager.playerBoard [i, j].tag.StartsWith ("Ship")) {
 						// This will be a hit
@@ -161,6 +171,7 @@ public class EnemyBehaviour : MonoBehaviour {
 						gameManager.playerBoard[i,j].GetComponent<Ship>().takeDamage ();
 						gameManager.playerBoard[i,j].GetComponent<Renderer>().material = hit;
 						searching = true;
+						updateText.text = "Computer hit!";
 						if (gameManager.playerBoard[i,j].GetComponent<Ship>().isSunk ()) {
 							gameManager.playerShips--;
 							//change i and j
@@ -175,7 +186,7 @@ public class EnemyBehaviour : MonoBehaviour {
 				} else {
 					find = false;
 					Debug.Log ("AI win");
-					AiWinPanel.SetActive (true);
+					aiWinPanel.SetActive (true);
 					//Application.LoadLevel ("GameOver");
 				}
 			}
