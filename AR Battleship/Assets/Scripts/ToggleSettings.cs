@@ -5,19 +5,10 @@ using UnityEngine.UI;
 
 public class ToggleSettings : MonoBehaviour {
 
-	public Toggle scale, ui, transition, selection;
+	public Toggle scale, ui, selection;
 	public GameObject panel;
 	public static bool scaleToggle, selectionToggle, UiToggle;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void openSettings() {
 		panel.SetActive (true);
@@ -43,10 +34,6 @@ public class ToggleSettings : MonoBehaviour {
 		} else {
 			UiToggle = false;
 		}
-	}
-
-	public void toggleTransitions() {
-		//fade to animation?
 	}
 
 	public void toggleSelection() {

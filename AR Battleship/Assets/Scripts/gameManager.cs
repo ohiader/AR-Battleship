@@ -38,6 +38,8 @@ public class gameManager : MonoBehaviour {
 	public static int count4 = 0;
 	public static int count5 = 0;
 
+	public static float boardY = -4.5f;
+
 	public struct coord {
 		public int i;
 		public int j;
@@ -84,12 +86,12 @@ public class gameManager : MonoBehaviour {
 					playerBoard[i, j].transform.position += new Vector3 (-4, 1.5f, -6);
 				} else {
 					playerBoard[i,j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
-					playerBoard[i, j].transform.position += new Vector3 (-1.5f, 0.0f, -8.5f);
+					playerBoard[i, j].transform.position += new Vector3 (-5.5f, 0.0f, 16.5f);
 				}
 
                 playerBoard[i,j].transform.parent = transform;
 
-                playerBoard[i, j].transform.position = new Vector3(playerBoard[i, j].transform.position.x, 18f, playerBoard[i, j].transform.position.z);
+				playerBoard[i, j].transform.position = new Vector3(playerBoard[i, j].transform.position.x, boardY, playerBoard[i, j].transform.position.z);
 
                 playerBoard[i,j].transform.name = "gridPoint" + indexOfBoard;
 				playerBoard [i, j].tag = "Inactive";
@@ -121,11 +123,9 @@ public class gameManager : MonoBehaviour {
 
 	public void DonePlacingShips()
 	{
-		//Application.DontDestroyOnLoad (playerBoard);
-		//Application.DontDestroyOnLoad (notLoaded);
+		// initiate board flip
 		if (count1 == 1 && count2 == 1 && count3 == 1 && count4 == 1 && count5 == 1) {
-			Color color = new Color (0.2f, 0.2f, 0.2f, 1.0f);
-			Initiate.Fade("enemyBoard", color, 2.0f);
+			StageScript.begin = true;
 		}
 		//Application.LoadLevel("enemyBoard");
 	}

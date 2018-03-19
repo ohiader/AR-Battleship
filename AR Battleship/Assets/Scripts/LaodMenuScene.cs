@@ -13,7 +13,7 @@ public class LaodMenuScene : MonoBehaviour {
 	}
 	public void LoadGameScene()
 	{
-		SceneManager.LoadScene ("placeShips");
+		SceneManager.LoadScene ("GameScene");
 	}
 
 	public void Start()

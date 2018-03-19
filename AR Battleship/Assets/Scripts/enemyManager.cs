@@ -34,6 +34,8 @@ public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 	public static Material miss = null;
 	public static Material hit = null;
 
+	public static float boardY = -4.0f;
+
 	public GameObject shootObj, vShootButton;
 
 	void Awake() {
@@ -70,13 +72,12 @@ public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 					//enemyBoard[i, j].transform.position += new Vector3(-4, 1.0f, -6);
 				} else {
 					enemyBoard [i, j] = (GameObject)Instantiate (gridPoint, new Vector3 ((float)i, 0, (float)j), Quaternion.identity);
+					enemyBoard[i, j].transform.localPosition += new Vector3 (2.5f, 0.0f, -5.5f);
 				}
 					enemyBoard[i, j].transform.parent = transform;
 
-                    //enemyBoard[i, j].transform.position = new Vector3(enemyBoard[i, j].transform.position.x, 53, enemyBoard[i, j].transform.position.z);
-
-                    enemyBoard[i, j].transform.position = gameManager.playerBoard[i, j].transform.position;
-                    enemyBoard[i, j].transform.rotation = gameManager.playerBoard[i, j].transform.rotation;
+					enemyBoard[i, j].transform.rotation = gameManager.playerBoard[i, j].transform.rotation;
+					enemyBoard[i, j].transform.localPosition = new Vector3(enemyBoard[i, j].transform.position.x, boardY, enemyBoard[i, j].transform.position.z);
                     enemyBoard[i, j].transform.localScale = gameManager.playerBoard[i, j].transform.localScale;
 
                     enemyBoard[i, j].name = "gridPoint" + index;
@@ -355,6 +356,7 @@ public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 				//pop up "Miss!"
 				reportBack = 0;
 				flag = false;
+				GUIEnemyBoard.second = true;
 				PlayerShoot.targetedShip.tag = "miss";
 				Debug.Log("Miss!");
 				PlayerShoot.targetedShip.GetComponent<Renderer>().material = miss;
@@ -368,8 +370,10 @@ public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 
 	public void OnButtonPressed(VirtualButtonBehaviour vb) {
 		if (vb.gameObject.name == "VShootButton") {
-			// Decrease Y scale to make button look pressed
-			shootObj.transform.localScale = new Vector3(0.7692308f, 0.5f, 0.7692308f);
+			if (ToggleSettings.UiToggle) {
+				// Decrease Y scale to make button look pressed
+				shootObj.transform.localScale = new Vector3(0.7692308f, 0.5f, 0.7692308f);
+			}
 		}
 
 		Debug.Log ("Pressed");
@@ -377,10 +381,12 @@ public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 
 	public void OnButtonReleased(VirtualButtonBehaviour vb) {
 		if (vb.gameObject.name == "VShootButton") {
-			// Increase Y scale to make button look released
-			shootObj.transform.localScale = new Vector3(0.7692308f, 1.2f, 0.7692308f);
-			// shoot
-			shoot();
+			if (ToggleSettings.UiToggle) {
+				// Increase Y scale to make button look released
+				shootObj.transform.localScale = new Vector3(0.7692308f, 1.2f, 0.7692308f);
+				// shoot
+				shoot();
+			}
 		}
 		Debug.Log ("Released");
 	}
