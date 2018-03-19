@@ -61,5 +61,6 @@ public class GUIPlaceShips : MonoBehaviour {
 	public void donePlacing() {
 		placeShipsPanel.SetActive (false);
 		updateText.text = "Moving to enemy board";
+		this.gameObject.GetComponent<GUIEnemyBoard> ().enabled = true;
 	}
 }

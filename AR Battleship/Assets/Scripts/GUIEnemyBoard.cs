@@ -5,17 +5,19 @@ using UnityEngine.UI;
 
 public class GUIEnemyBoard : MonoBehaviour {
 
-	public GameObject scope, aimForShipsPanel, shootBtn, updatePanel, toPlayerBoardBtn, enemyBoardPrefab;
+	public GameObject scope, aimForShipsPanel, shootBtn, updatePanel, toPlayerBoardBtn, enemyBoardPrefab, arCamera;
 	public Text updateText;
 	bool switchOff = false;
 	public static bool second = false;
 
 	// Use this for initialization
-	void Start () {
-		if (ToggleSettings.selectionToggle) {
+	void Awake () {
+		if (ToggleSettings.selectionToggle && StageScript.flipped) {
 			scope.SetActive (true);
+			arCamera.gameObject.GetComponent<IndirectSelection> ().enabled = true;
 		} else if (!ToggleSettings.selectionToggle) {
 			scope.SetActive (false);
+			arCamera.gameObject.GetComponent<IndirectSelection> ().enabled = false;
 		}
 		if (ToggleSettings.UiToggle) {
 			shootBtn.SetActive (false);
@@ -35,6 +37,7 @@ public class GUIEnemyBoard : MonoBehaviour {
 		if (enemyManager.reportBack == 0) {
 			shootBtn.SetActive (false);
 			toPlayerBoardBtn.SetActive (true);
+			updateText.color = Color.white;
 			updateText.text = "Missed!";
 		} else if (enemyManager.reportBack == 1) {
 			updateText.color = Color.green;
@@ -51,8 +54,10 @@ public class GUIEnemyBoard : MonoBehaviour {
 		enemyManager.reportBack = 2;
 		if (ToggleSettings.selectionToggle) {
 			scope.SetActive (true);
+			arCamera.gameObject.GetComponent<IndirectSelection> ().enabled = true;
 		} else if (!ToggleSettings.selectionToggle) {
 			scope.SetActive (false);
+			arCamera.gameObject.GetComponent<IndirectSelection> ().enabled = false;
 		}
 		if (!ToggleSettings.UiToggle) {
 			shootBtn.SetActive (true);
@@ -64,6 +69,11 @@ public class GUIEnemyBoard : MonoBehaviour {
 		StageScript.begin = true;
 		this.gameObject.GetComponent<EnemyBehaviour> ().enabled = true;
 		this.gameObject.GetComponent<GUIEnemyBoard> ().enabled = false;
+		if (ToggleSettings.selectionToggle) {
+			scope.SetActive (false);
+			arCamera.gameObject.GetComponent<IndirectSelection> ().enabled = false;
+		}
+		EnemyBehaviour.find = true;
 		toPlayerBoardBtn.SetActive (false);
 	}
 
