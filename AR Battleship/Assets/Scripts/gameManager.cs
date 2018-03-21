@@ -113,11 +113,11 @@ public class gameManager : MonoBehaviour {
 		b5 = this.gameObject.transform.GetChild (4).gameObject;
 
 		if (ToggleSettings.scaleToggle) {
-			b1.transform.localScale = new Vector3 (8.0f, 8.0f, 8.0f);
-			b2.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
-			b3.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
-			b4.transform.localScale = new Vector3 (6.0f, 6.0f, 6.0f);
-			b5.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
+			b1.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
+			b2.transform.localScale = new Vector3 (0.07f, 0.07f, 0.07f);
+			b3.transform.localScale = new Vector3 (0.07f, 0.07f, 0.07f);
+			b4.transform.localScale = new Vector3 (0.08f, 0.08f, 0.08f);
+			b5.transform.localScale = new Vector3 (0.07f, 0.07f, 0.07f);
 		}
 	}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
+using UnityEngine.Audio;
 
 public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 	public GameObject gridPoint;
@@ -20,6 +21,9 @@ public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 	public static bool flag = false;
 	public static enemyManager instance = null;
 
+	// shoot sound audio source
+	public GameObject shootSource;
+	public AudioClip shootSound;
 
 	// use to report to GUI if hit(1) or miss(0)
 	public static int reportBack = 2;
@@ -205,28 +209,28 @@ public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 			this.transform.GetChild(0).gameObject.SetActive (true);
 			this.transform.GetChild (0).gameObject.transform.localPosition = new Vector3 (2.64f, -3.32f, 0.94f);
 			if (ToggleSettings.scaleToggle) {
-				this.transform.GetChild (0).gameObject.transform.localScale = new Vector3 (8.0f, 8.0f, 8.0f);
+				this.transform.GetChild (0).gameObject.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
 			}
 		}
 		if (health2 < 0) {
 			this.transform.GetChild(1).gameObject.SetActive (true);
 			this.transform.GetChild (1).gameObject.transform.localPosition = new Vector3 (3.87f, -3.28f, -2.1f);
 			if (ToggleSettings.scaleToggle) {
-				this.transform.GetChild (1).gameObject.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
+				this.transform.GetChild (1).gameObject.transform.localScale = new Vector3 (0.07f, 0.07f, 0.07f);
 			}
 		}
 		if (health3 < 0) {
 			this.transform.GetChild(2).gameObject.SetActive (true);
 			this.transform.GetChild (2).gameObject.transform.localPosition = new Vector3 (1.36f, -3.25f, -4.08f);
 			if (ToggleSettings.scaleToggle) {
-				this.transform.GetChild (2).gameObject.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
+				this.transform.GetChild (2).gameObject.transform.localScale = new Vector3 (0.07f, 0.07f, 0.07f);
 			}
 		}
 		if (health4 < 0) {
 			this.transform.GetChild(3).gameObject.SetActive (true);
 			this.transform.GetChild (3).gameObject.transform.localPosition = new Vector3 (6.75f, -3.12f, -2.21f);
 			if (ToggleSettings.scaleToggle) {
-				this.transform.GetChild (3).gameObject.transform.localScale = new Vector3 (6.0f, 6.0f, 6.0f);
+				this.transform.GetChild (3).gameObject.transform.localScale = new Vector3 (0.08f, 0.08f, 0.08f);
 			}
 		}
 		if (health5 < 0) {
@@ -234,7 +238,7 @@ public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 			this.transform.GetChild(4).gameObject.SetActive (true);
 			this.transform.GetChild (4).gameObject.transform.localPosition = new Vector3 (6.04f, -3.16f, -2.1f);
 			if (ToggleSettings.scaleToggle) {
-				this.transform.GetChild (4).gameObject.transform.localScale = new Vector3 (5.0f, 5.0f, 5.0f);
+				this.transform.GetChild (4).gameObject.transform.localScale = new Vector3 (0.07f, 0.07f, 0.07f);
 			}
 		}
 		if (enemyShips == 0) {
@@ -320,6 +324,9 @@ public class enemyManager : MonoBehaviour, IVirtualButtonEventHandler {
 	// if no hit, make "Miss!" appear and OK button to move to playerBoard scene
 	// if all ships are sunk go to gameOver scene
 	public void shoot() {
+
+		shootSource.GetComponent<AudioSource> ().PlayOneShot (shootSound);
+
 		// check if target is a ship
 		if (ToggleSettings.selectionToggle) {
 			if (IndirectSelection.target.tag.StartsWith("Eship")) {
